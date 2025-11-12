@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Token Login</title>
+    <style>
+        body { font-family: Arial; background: #f4f4f4; text-align: center; padding-top: 50px; }
+        form { background: white; display: inline-block; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input { padding: 8px; width: 250px; }
+        button { padding: 8px 15px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .msg { margin-top: 20px; font-weight: bold; }
+        .data { text-align: left; margin: 20px auto; width: 50%; background: #fff; padding: 20px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Enter API Token</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="token" placeholder="Enter your token here">
+        <button type="submit">Access API</button>
+    </form>
+
+    {% if success %}
+        <div class="msg" style="color: green;">{{ success }}</div>
+    {% endif %}
+    {% if error %}
+        <div class="msg" style="color: red;">{{ error }}</div>
+    {% endif %}
+
+    {% if api_data %}
+        <div class="data">
+            <h3>API Data:</h3>
+            <pre>{{ api_data|safe }}</pre>
+        </div>
+    {% endif %}
+</body>
+</html>
